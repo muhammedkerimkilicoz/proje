@@ -1,54 +1,76 @@
-<style>
-body{
-    background: #0ed023;
-}
-#frm{
-    border: solid gray 1px;
-    width: 20px;
-    border-radius: 5px;
-    margin: 100px auto;
-    background:  white;
-}
-#btn{
-    color: #fff;
-    background: #337ab7;
-    padding: 5px;
-    margin-left: 69px;
-}
-</style>
-<?php
+    <!DOCTYPE html>
+<html lang="tr">
+<form action="login.php" method="POST">
+<head>
+	<title>Mami</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
 
-include("ayarlar.php");
-error_reporting(0);
+
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+				
+					
+					<span class="login100-form-title p-b-34 p-t-27">
+						<?php 
+
+include("ayar.php");
 ob_start();
-
-
+session_start();
+//error_reporting(0);
 
 $kadi = $_POST['kadi'];
 $sifre = $_POST['sifre'];
 
-//$sql_check =  mysqli_query($success, "select * from admin where kadi='".$kadi."' and sifre='".md5($sifre."' ") or die (mysqli_error());
+$sql_check = mysqli_query($conn,"select * from uyeler where username='".$kadi."' and password='".$sifre."' ") or die(mysqli_error());
 
-$sql = mysqli_query( "SELECT * FROM proje WHERE sifre = '".$_POST['kadi']."' and sifre = '".md5($_POST['sifre'])."'");
-$row = mysqli_num_rows($sql);
-
-if($rom > 0)  { 
-    session_start(); 
-    $_SESSION["kadi"] = $_POST['kadi'];
-    $_SESSION["sifre"] = $_POST['sifre'];
-    
+if(mysqli_num_rows($sql_check))  {
+    $_SESSION["login"] = "true";
+    $_SESSION["user"] = $kadi;
+    $_SESSION["pass"] = $sifre;
     header("Location:admin.php");
 }
 else {
-    if($kadi=="" or $sifre=="") {
-        echo "<center>Lutfen kullanici adi ya da sifreyi bos birakmayiniz..! <a href=javascript:history.back(-1)>Geri Don</a></center>";
-    }
-    else {
-        echo "<center>Kullanici Adi/Sifre Yanlis.<br><a href=javascript:history.back(-1)>Geri Don</a></center>";
-    }
+	if($kadi=="" or $sifre=="") {
+
+		echo "<center>Lütfen Kullanıcı Adı ve Şifreyi Boş Bırakmayınız..! <a href=javascript:history.back(-1)>Geri Don</a></center>";
+	}
+	else {
+		echo "<center>Kullanıcı Adı veya Şifre Yanlış.<br><a href=javascript:history.back(-1)>Geri Don</a></center>";
+	}
 }
- 
+
 ob_end_flush();
-
-
 ?>
+						
+					</span>
+					
+				
+	</div>
+		</div>
+	</div>
+</html>
