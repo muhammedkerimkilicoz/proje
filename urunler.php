@@ -47,24 +47,24 @@
         <th></th>
     </tr>
 
-<!-- Şimdi ise verileri sıralayarak çekmek için PHP kodlamamıza geçiyoruz. -->
+
 
 <?php 
 include("ayar.php");
-$sorgu = mysqli_query($conn,"SELECT * FROM urunler"); // Makale tablosundaki tüm verileri çekiyoruz.
+$sorgu = mysqli_query($conn,"SELECT * FROM urunler"); 
 
 while ($sonuc = $sorgu->fetch_assoc()) { 
 
-$id = $sonuc['id']; // Veritabanından çektiğimiz id satırını $id olarak tanımlıyoruz.
+$id = $sonuc['id']; 
 $urunadi = $sonuc['urunadi'];
 $urunaciklama = $sonuc['urunaciklama'];
 $urunfiyat = $sonuc['urunfiyat'];
 
-// While döngüsü ile verileri sıralayacağız. Burada PHP tagını kapatarak tırnaklarla uğraşmadan tekrarlatabiliriz. 
+
 ?>
     
     <tr>
-        <td><?php echo $id; // Yukarıda tanıttığımız gibi alanları dolduruyoruz. ?></td>
+        <td><?php echo $id;  ?></td>
         <td><?php echo $urunadi; ?></td>
         <td><?php echo $urunaciklama; ?></td>
         <td><?php echo $urunfiyat; ?></td>
@@ -74,7 +74,7 @@ $urunfiyat = $sonuc['urunfiyat'];
 
 <?php 
 } 
-// Tekrarlanacak kısım bittikten sonra PHP tagının içinde while döngüsünü süslü parantezi kapatarak sonlandırıyoruz. 
+
 ?>
 
 </table>
