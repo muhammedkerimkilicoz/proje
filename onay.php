@@ -1,10 +1,10 @@
     <?php 
     
     include("ayar.php");
-        // Form Gönderilmişmi Kontrolü Yapalım
+  
         if($_POST){
         
-            // Formdan Gelen Kayıtlar
+           
             $urunadi       =    $_POST["urunadi"];
             $urunaciklama    =    $_POST["urunaciklama"];
             $urunfiyat	=	$_POST["urunfiyat"];
@@ -14,10 +14,10 @@
             $tip = $_FILES["fileUp"]["type"];
             $boyut = $_FILES["fileUp"]["size"];
             $hedef = "images";
-            // Veritabanına Ekleyelim.
+       
             $ekle = mysqli_query($conn,"insert into urunler (urunadi ,urunaciklama,urunfiyat,ad) values ('$urunadi','$urunaciklama','$urunfiyat', '$ad')");
            
-			$kaydet = move_uploaded_file($kaynak,$hedef."/".$ad); // resmimizi klasöre kayıt ettiriyoruz.
+			$kaydet = move_uploaded_file($kaynak,$hedef."/".$ad); 
            
         }
     ?>
